@@ -1,0 +1,13 @@
+<?xml version="1.0"?>
+<package format="2">
+  <name>auv3_description</name>
+  <version>0.0.0</version>
+  <description>The auv3_description package</description>
+  <maintainer email="yash_atd@thesalemaeropark.com">Yash Kumar Sahu</maintainer>
+  <license>MIT</license>
+  <author email="yash_atd@thesalemaeropark.com">Yash Kumar Sahu</author>
+  <buildtool_depend>catkin</buildtool_depend>
+  <export>
+    <!-- Other tools can request additional information be placed here -->
+  </export>
+</package>

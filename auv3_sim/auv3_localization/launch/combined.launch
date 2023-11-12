@@ -1,0 +1,9 @@
+<launch>
+    <include file="$(find auv3_description)/launch/auv3_gazebo.launch"/>
+    <include file="$(find auv3_simulation)/launch/velocity_cmd.launch"/>
+    <include file="$(find auv3_localization)/launch/robot_localization_local.launch"/>
+    <include file="$(find auv3_localization)/launch/robot_localization_global.launch"/>
+    <include file="$(find auv3_localization)/launch/navsat_transform.launch"/>
+    <include file="$(find auv3_localization)/launch/rviz_localization.launch"/>
+    <node name="twistTOtwiststamp" pkg="auv3_gps_navigation" type="twistTOtwiststamp.py"/>
+</launch>

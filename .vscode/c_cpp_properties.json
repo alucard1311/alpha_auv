@@ -1,0 +1,44 @@
+{
+  "configurations": [
+    {
+      "browse": {
+        "databaseFilename": "${default}",
+        "limitSymbolsToIncludedHeaders": false
+      },
+      "includePath": [
+        "/home/atd/ros_mvp_ws/devel/include/**",
+        "/home/atd/uuv_ws/devel/include/**",
+        "/home/atd/auv_ws/devel/include/**",
+        "/opt/ros/noetic/include/**",
+        "/home/atd/catkin_ws/carto_ws/install_isolated/include/**",
+        "/home/atd/auv_ws/src/auv3_controls/include/**",
+        "/home/atd/auv_ws/src/auv3_navigation/include/**",
+        "/home/atd/auv_ws/src/auv3_payloads/include/**",
+        "/home/atd/auv_ws/src/auv3_stm_link/include/**",
+        "/home/atd/auv_ws/src/auv3_testing/include/**",
+        "/home/atd/auv_ws/src/auv3_watchdogs/include/**",
+        "/home/atd/ros_mvp_ws/src/auv4_core/auv4_localization/include/**",
+        "/home/atd/auv_ws/src/auv3_mission/include/**",
+        "/home/atd/ros_mvp_ws/src/mvp_mission/behavior_interface/include/**",
+        "/home/atd/uuv_ws/src/darknet_ros/darknet_ros/include/**",
+        "/home/atd/ros_mvp_ws/src/mvp_control/include/**",
+        "/home/atd/ros_mvp_ws/src/alpha_auv/external/bluerobotics_ping360/ping360_sonar/include/**",
+        "/home/atd/auv_ws/src/sbg_ros_driver/include/**",
+        "/home/atd/ros_mvp_ws/src/stonefish_mvp/include/**",
+        "/home/atd/ros_mvp_ws/src/alpha_auv/external/uno_lqe/include/**",
+        "/home/atd/uuv_ws/src/uuv_simulator/uuv_gazebo_plugins/uuv_gazebo_plugins/include/**",
+        "/home/atd/uuv_ws/src/uuv_simulator/uuv_gazebo_plugins/uuv_gazebo_ros_plugins/include/**",
+        "/home/atd/uuv_ws/src/uuv_simulator/uuv_sensor_plugins/uuv_sensor_ros_plugins/include/**",
+        "/home/atd/uuv_ws/src/uuv_simulator/uuv_world_plugins/uuv_world_plugins/include/**",
+        "/home/atd/uuv_ws/src/uuv_simulator/uuv_world_plugins/uuv_world_ros_plugins/include/**",
+        "/usr/include/**"
+      ],
+      "name": "ROS",
+      "intelliSenseMode": "gcc-x64",
+      "compilerPath": "/usr/bin/gcc",
+      "cStandard": "gnu11",
+      "cppStandard": "c++14"
+    }
+  ],
+  "version": 4
+}

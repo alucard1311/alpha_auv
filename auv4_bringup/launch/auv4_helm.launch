@@ -1,0 +1,53 @@
+<!-- This file is part of AUV V-4.
+    Author: Vinay Naidu
+    Email: vinay.naidu1311@gmail.com
+    Year: 2023
+    Copyright (C) 2023 Autonomous and Undersea Subsystems Division
+    
+    -->
+
+<launch>
+
+    <arg name="robot_name" default="auv3" />
+
+    <node ns="$(arg robot_name)" pkg="mvp_helm" type="helm" name="helm" output="screen">
+        <!--
+            Load the parameters for the MVP Helm
+        -->
+        <rosparam
+            command="load"
+            file="$(find auv4_config)/mission/config/helm.yaml" />
+
+        <!--
+            Load all the parameters for the behaviors.
+        -->
+        <!-- <rosparam command="load" ns="depth_tracking"
+            file="$(find auv4_config)/mission/param/depth_tracking.yaml" />
+        <rosparam command="load" ns="gps_wpt" file="$(find auv4_config)/mission/param/gps_wpt.yaml" /> -->
+        <rosparam command="load" ns="hold_pos"
+            file="$(find auv4_config)/mission/param/hold_pos.yaml" />
+        <rosparam command="load" ns="path_global"
+            file="$(find auv4_config)/mission/param/path_global.yaml" />
+        <rosparam command="load" ns="path_local"
+            file="$(find auv4_config)/mission/param/path_local.yaml" />
+        <rosparam command="load" ns="periodic_surfacing"
+            file="$(find auv4_config)/mission/param/periodic_surfacing.yaml" />
+        <rosparam command="load" ns="timer" file="$(find auv4_config)/mission/param/timer.yaml" />
+        <rosparam command="load" ns="motion_evaluation"
+            file="$(find auv4_config)/mission/param/motion_evaluation.yaml" />
+
+        <rosparam command="load" ns="path_global"
+            file="$(find auv4_config)/mission/param/path_global.yaml" />
+        <param name="path_global/frame_id" value="odom" />
+
+        <!-- gps_wpt behavior will convert gps coordinate (using fromLL service) into local
+        coordinate and publish to the topic-->
+        <rosparam command="load" ns="gps_wpt"
+            file="$(find auv4_config)/mission/param/gps_wpt.yaml" />
+        <param name="gps_wpt/target_frame_id" value="odom" />
+        <param name="gps_wpt/target_topic"
+            value="/$(arg robot_name)/helm/path_global/update_waypoints" />
+        <param name="gps_wpt/fromll_service" value="/$(arg robot_name)/fromLL" />
+    </node>
+
+</launch>

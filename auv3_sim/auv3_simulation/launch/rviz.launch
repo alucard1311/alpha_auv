@@ -1,0 +1,19 @@
+<?xml version="1.0"?>
+<launch>
+    
+    <arg name="robot" default="auv3"/>
+    <arg name="pose" default="False"/>
+
+    <group ns="auv3"> 
+        
+        <node name="pose_publisher" pkg="slider_publisher" type="slider_publisher" if="$(arg pose)">
+            <param name="file" value="$(find auv3_simulation)/launch/PoseStamped.yaml"/>
+        </node>
+        <param name="robot_description" command="$(find xacro)/xacro $(find auv3_simulation)/urdf/$(arg robot).xacro"/>
+        
+        <node name="robot_state_publisher" pkg="robot_state_publisher" type="robot_state_publisher" />
+        
+        <node name="tf_bridge" pkg="freefloating_gazebo" type="rviz_bridge.py" output="screen" respawn="true"/>  
+        <node name="rviz" pkg="rviz" type="rviz"  args="-d $(find auv3_simulation)/config/auv3.rviz" output="screen"  respawn="true"/>
+    </group>
+</launch>

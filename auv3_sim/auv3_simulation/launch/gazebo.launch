@@ -1,0 +1,46 @@
+<launch>
+  <arg name="debug" default="false"/>
+	<arg name="gui" default="false"/>
+	<arg name="paused" default="true"/>
+	<arg name="use_sim_time" default="true"/>
+	<arg name="verbose" default="true"/>
+	<arg name="world_name" value="$(find auv3_simulation)/worlds/uwv.world"/>
+
+	<include file="$(find gazebo_ros)/launch/empty_world.launch">
+		<arg name="world_name" value="$(arg world_name)"/>
+		<arg name="debug" value="$(arg debug)"/>
+		<arg name="gui" value="$(arg gui)"/>
+		<arg name="paused" value="$(arg paused)"/>
+		<arg name="use_sim_time" value="$(arg use_sim_time)"/>
+		<arg name="verbose" value="$(arg verbose)"/>
+	</include>
+
+  <param name="robot_description" command="$(find xacro)/xacro $(find auv3_simulation)/urdf/pan_copy.xacro"/>
+  <node name="spawner" pkg="gazebo_ros" type="spawn_model" respawn="false" output="screen" args="-urdf -model brov -param robot_description -x 0 -y 0 -z -1 "/>
+
+  <!-- add 50 x 50 m turquoise water -->
+  <!-- <node name="surface" pkg="freefloating_gazebo" type="surface.py"
+  args="-x 50 -y 50 -g 0.2 -b 1 -a 0.2"
+  /> -->
+
+  <!-- <node
+    name="spawn_model"
+    pkg="gazebo_ros"
+    type="spawn_model"
+    args="-file $(find auv3_simulation)/urdf/pan.urdf -urdf -model pan_tilt"
+    output="screen" /> -->
+    <!-- args="-file $(find auv3_simulation)/urdf/auv3.urdf -urdf -model auv3"     -->
+    <!--  -->
+
+  <node
+    name="tf_footprint_base"
+    pkg="tf"
+    type="static_transform_publisher"
+    args="0 0 0 0 0 0 base_link base_footprint 40" />
+
+  <node
+    name="fake_joint_calibration"
+    pkg="rostopic"
+    type="rostopic"
+    args="pub /calibrated std_msgs/Bool true" />
+</launch>

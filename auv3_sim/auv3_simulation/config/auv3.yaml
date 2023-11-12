@@ -1,0 +1,25 @@
+controllers:
+    config:
+        body:
+            cascaded_position: True
+            dynamic_reconfigure: True
+    x:
+        velocity: {p: 10, i: 1, d: 0.1}
+        position: {p: 10, i: 1, d: .1}
+    y:
+        velocity: {p: 10, i: 1, d: 0.1}
+        position: {p: 10, i: 1, d: 0.1}
+    z:
+        velocity: {p: 10, i: 1, d: 0.1}
+        position: {p: 10, i: 1, d: 0}
+    roll:
+        velocity: {p: 10, i: 1, d: 0.1}
+        position: {p: 10, i: 1, d: .1}
+    pitch:
+        velocity: {p: 10, i: 1, d: 0.1}
+        position: {p: 10, i: 1, d: 0.1}
+    yaw:
+        velocity: {p: 10, i: 1, d: 0.1}
+        position: {p: 10, i: 1, d: 0.1}
+
+        

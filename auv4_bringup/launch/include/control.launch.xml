@@ -1,0 +1,21 @@
+<!-- This file is part of AUV V-4.
+    Author: Vinay Naidu
+    Email: vinay.naidu1311@gmail.com
+    Year: 2023
+    Copyright (C) 2023 Autonomous and Undersea Subsystems Division
+    
+    -->
+
+<launch>
+
+    <arg name="robot_name" default="changeme" />
+
+    <node ns="$(arg robot_name)" pkg="mvp_control" type="mvp_control_ros_node" name="alpha_control"
+        output="screen">
+        <rosparam command="load" file="$(find auv4_config)/config/control.yaml" />
+        <param name="tf_prefix" value="" />
+        <param name="world_link" value="world_ned" />
+        <param name="odometry_source" value="/auv3/ekf_local_odom" />
+    </node>
+
+</launch>

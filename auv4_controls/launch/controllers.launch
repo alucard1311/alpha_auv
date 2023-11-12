@@ -1,0 +1,57 @@
+<!-- This file is part of AUV V-4.
+    Author: Vinay Naidu
+    Email: vinay.naidu1311@gmail.com
+    Year: 2023
+    Copyright (C) 2023 Autonomous and Undersea Subsystems Division
+    
+-->
+<!--Depth and pitch Control Law-->
+<launch>
+    <node name="depth_controller" pkg="pid" type="controller" output="screen">
+        <param name="Kp" value="12" />
+        <param name="Ki" value="2" />
+        <param name="Kd" value="1" />
+        <param name="upper_limit" value="10" />
+        <param name="lower_limit" value="6" />
+        <param name="windup_limit" value="10" />
+        <param name="max_loop_frequency" value="100.0" />
+        <param name="min_loop_frequency" value="100.0" />
+        <param name="setpoint_topic" value="auv3/setpoint_depth" />
+        <param name="topic_from_plant" value="auv3/plant/depth" />
+        <param name="topic_from_controller" value="auv3/controller/depth_effort" />
+    </node>
+<!--Yaw Control Law-->
+    <node name="yaw_controller" pkg="pid" type="controller" output="screen">
+        <param name="Kp" value="5" />
+        <param name="Ki" value="0" />
+        <param name="Kd" value="0" />
+        <param name="upper_limit" value="3" />
+        <param name="lower_limit" value="0" />
+        <param name="windup_limit" value="5" />
+        <param name="max_loop_frequency" value="100.0" />
+        <param name="min_loop_frequency" value="100.0" />
+        <!--To be edited-->
+        <param name="setpoint_topic" value="auv3/setpoint_yaw" />
+        <param name="topic_from_plant" value="auv3/plant/yaw" />
+        <param name="topic_from_controller" value="auv3/controller/yaw_effort" />
+    </node>
+<!--Velocity Control Law-->
+<node name="velocity_controller" pkg="pid" type="controller" output="screen">
+        <param name="Kp" value="5" />
+        <param name="Ki" value="0" />
+        <param name="Kd" value="0" />
+        <param name="upper_limit" value="25" />
+        <param name="lower_limit" value="0" />
+        <param name="windup_limit" value="5" />
+        <param name="max_loop_frequency" value="100.0" />
+        <param name="min_loop_frequency" value="100.0" />
+        <!--To be edited-->
+        <param name="setpoint_topic" value="auv3/controller/velocity_setpoint" />
+        <param name="topic_from_plant" value="auv3/plant/velocity" />
+        <param name="topic_from_controller" value="auv3/velocity_effort" />
+    </node>    
+
+<!--Controller Driver-->
+<node pkg="auv4_controls" name="controller_bringup" type="controller.py" output="screen"/>
+
+</launch>

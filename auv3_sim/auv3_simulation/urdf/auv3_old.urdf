@@ -1,0 +1,393 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- This URDF was automatically created by SolidWorks to URDF Exporter! Originally created by Stephen Brawner (brawner@gmail.com) 
+     Commit Version: 1.6.0-4-g7f85cfe  Build Version: 1.6.7995.38578
+     For more information, please see http://wiki.ros.org/sw_urdf_exporter -->
+<robot
+  name="auv3">
+
+  
+
+  <!-- Ground truth publisher plugin -->
+  <gazebo>
+    <plugin filename="libgazebo_ros_p3d.so" name="p3d_base_controller">
+      <alwaysOn>true</alwaysOn>
+      <updateRate>50.0</updateRate>
+      <bodyName>base_link</bodyName>
+      <topicName>sim_ground_truth</topicName>
+      <gaussianNoise>0.0</gaussianNoise>
+      <frameName>world</frameName>
+      <xyzOffsets>0 0 0</xyzOffsets>
+      <rpyOffsets>0 0 0</rpyOffsets>
+    </plugin>
+  </gazebo>
+
+  <!-- <plugin name="BuoyancyPlugin" filename="libBuoyancyPlugin.so">
+    <fluid_density>1000</fluid_density>
+    <link name="base_link">
+      <center_of_volume>1 2 3</center_of_volume>
+      <volume>50</volume>
+    </link>
+  </plugin> -->
+
+  <link
+    name="base_link">
+    <inertial>
+      <origin
+        xyz="0.03086 2.5488E-05 0.00091758"
+        rpy="0 0 0" />
+      <mass
+        value="6" />
+      <inertia
+        ixx="0.028032"
+        ixy="-0.0034682"
+        ixz="0.000773"
+        iyy="2.7828"
+        iyz="-5.189E-07"
+        izz="2.7828" />
+    </inertial>
+    <!-- <buoyancy>
+      <compensation>1.01</compensation>
+      <origin xyz="0 0 0.5"/>
+      <limit radius="0.05"/>
+      <damping rpy="10 10 10" type="linear" xyz="50 50 50"/>
+    </buoyancy> -->
+    <visual>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://auv3_simulation/meshes/base_link.STL" />
+      </geometry>
+      <material
+        name="">
+        <color
+          rgba="0.79216 0.81961 0.93333 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://auv3_simulation/meshes/base_link.STL" />
+      </geometry>
+    </collision>
+  </link>
+  <link
+    name="fwd_thruster_u_link">
+    <inertial>
+      <origin
+        xyz="0.03086 2.5488E-05 0.00091758"
+        rpy="0 0 0" />
+      <mass
+        value="6" />
+      <inertia
+        ixx="0.028032"
+        ixy="-0.0034682"
+        ixz="0.000773"
+        iyy="2.7828"
+        iyz="-5.189E-07"
+        izz="2.7828" />
+    </inertial>
+    <visual>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://auv3_simulation/meshes/fwd_thruster_u_link.STL" />
+      </geometry>
+      <material
+        name="">
+        <color
+          rgba="0.79216 0.81961 0.93333 1" />
+      </material>
+    </visual>
+    <!-- <collision>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://auv3_simulation/meshes/fwd_thruster_u_link.STL" />
+      </geometry>
+    </collision> -->
+    <!-- <buoyancy>
+      <compensation>
+            1.0				
+          </compensation>
+    </buoyancy> -->
+  </link>
+  <joint
+    name="fwd_thruster_u_joint"
+    type="revolute">
+    <origin
+      xyz="-0.86614 0 0"
+      rpy="0 0 0" />
+    <parent
+      link="base_link" />
+    <child
+      link="fwd_thruster_u_link" />
+    <axis
+      xyz="0 0 1" />
+    <limit
+      lower="-1.5"
+      upper="1.5"
+      effort="68"
+      velocity="450" />
+  </joint>
+  <link
+    name="fwd_thruster_s_link">
+    <inertial>
+      <origin
+        xyz="0.03086 2.5488E-05 0.00091758"
+        rpy="0 0 0" />
+      <mass
+        value="6" />
+      <inertia
+        ixx="0.028032"
+        ixy="-0.0034682"
+        ixz="0.000773"
+        iyy="2.7828"
+        iyz="-5.189E-07"
+        izz="2.7828" />
+    </inertial>
+    <visual>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://auv3_simulation/meshes/fwd_thruster_s_link.STL" />
+      </geometry>
+      <material
+        name="">
+        <color
+          rgba="0.79216 0.81961 0.93333 1" />
+      </material>
+    </visual>
+    <!-- <collision>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://auv3_simulation/meshes/fwd_thruster_s_link.STL" />
+      </geometry>
+    </collision> -->
+    <!-- <buoyancy>
+      <compensation>
+            1.0				
+          </compensation>
+    </buoyancy> -->
+  </link>
+  <joint
+    name="fwd_thruster_s_joint"
+    type="revolute">
+    <origin
+      xyz="-0.76114 0 0"
+      rpy="0 0 0" />
+    <parent
+      link="base_link" />
+    <child
+      link="fwd_thruster_s_link" />
+    <axis
+      xyz="0 1 0" />
+    <limit
+      lower="-1.5"
+      upper="1.5"
+      effort="68"
+      velocity="450" />
+  </joint>
+  <link
+    name="rear_thruster_s_link">
+    <inertial>
+      <origin
+        xyz="0.03086 2.5488E-05 0.00091758"
+        rpy="0 0 0" />
+      <mass
+        value="6" />
+      <inertia
+        ixx="0.028032"
+        ixy="-0.0034682"
+        ixz="0.000773"
+        iyy="2.7828"
+        iyz="-5.189E-07"
+        izz="2.7828" />
+    </inertial>
+    <visual>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://auv3_simulation/meshes/rear_thruster_s_link.STL" />
+      </geometry>
+      <material
+        name="">
+        <color
+          rgba="0.79216 0.81961 0.93333 1" />
+      </material>
+    </visual>
+    <!-- <collision>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://auv3_simulation/meshes/rear_thruster_s_link.STL" />
+      </geometry>
+    </collision> -->
+    <!-- <buoyancy>
+      <compensation>
+            1.0				
+          </compensation>
+    </buoyancy> -->
+  </link>
+  <joint
+    name="rear_thruster_s_joint"
+    type="revolute">
+    <origin
+      xyz="0.57886 0 0"
+      rpy="0 0 0" />
+    <parent
+      link="base_link" />
+    <child
+      link="rear_thruster_s_link" />
+    <axis
+      xyz="0 1 0" />
+    <limit
+      lower="-1.5"
+      upper="1.5"
+      effort="68"
+      velocity="450" />
+  </joint>
+  <link
+    name="rear_thruster_u_link">
+    <inertial>
+      <origin
+        xyz="0.0308597025353438 2.54877591582308E-05 0.000917577281197616"
+        rpy="0 0 0" />
+      <mass
+        value="6" />
+      <inertia
+        ixx="0.028031762287745"
+        ixy="-0.00346818358106527"
+        ixz="0.00077299665962685"
+        iyy="2.78278036856547"
+        iyz="-5.18897330748179E-07"
+        izz="2.78278090504477" />
+    </inertial>
+    <visual>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://auv3_simulation/meshes/rear_thruster_u_link.STL" />
+      </geometry>
+      <material
+        name="">
+        <color
+          rgba="0.792156862745098 0.819607843137255 0.933333333333333 1" />
+      </material>
+    </visual>
+    <!-- <collision>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://auv3_simulation/meshes/rear_thruster_u_link.STL" />
+      </geometry>
+    </collision> -->
+    <!-- <buoyancy>
+      <compensation>
+            1.0				
+          </compensation>
+    </buoyancy> -->
+  </link>
+  <joint
+    name="rear_thruster_u_joint"
+    type="revolute">
+    <origin
+      xyz="0.68386 0 0"
+      rpy="0 0 0" />
+    <parent
+      link="base_link" />
+    <child
+      link="rear_thruster_u_link" />
+    <axis
+      xyz="0 0 1" />
+    <limit
+      lower="-1.5"
+      upper="1.5"
+      effort="68"
+      velocity="450" />
+  </joint>
+  <link
+    name="surge_thruster_link">
+    <inertial>
+      <origin
+        xyz="0.03086 2.5488E-05 0.00091758"
+        rpy="0 0 0" />
+      <mass
+        value="6" />
+      <inertia
+        ixx="0.028032"
+        ixy="-0.0034682"
+        ixz="0.000773"
+        iyy="2.7828"
+        iyz="-5.189E-07"
+        izz="2.7828" />
+    </inertial>
+    <visual>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://auv3_simulation/meshes/surge_thruster_link.STL" />
+      </geometry>
+      <material
+        name="">
+        <color
+          rgba="0.79216 0.81961 0.93333 1" />
+      </material>
+    </visual>
+    <!-- <collision>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://auv3_simulation/meshes/surge_thruster_link.STL" />
+      </geometry>
+    </collision> -->
+    <!-- <buoyancy>
+      <compensation>
+            1.0				
+          </compensation>
+    </buoyancy> -->
+  </link>
+  <joint
+    name="surge_thruster_joint"
+    type="revolute">
+    <origin
+      xyz="0.96286 0 0"
+      rpy="0 0 0" />
+    <parent
+      link="base_link" />
+    <child
+      link="surge_thruster_link" />
+    <axis
+      xyz="1 0 0" />
+    <limit
+      lower="-1.5"
+      upper="1.5"
+      effort="68"
+      velocity="450" />
+  </joint>
+</robot>

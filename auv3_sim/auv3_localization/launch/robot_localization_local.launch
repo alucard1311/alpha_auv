@@ -1,0 +1,9 @@
+<launch>
+	<group ns="auv3">
+		<node pkg="robot_localization" type="ekf_localization_node" name="ekf_local_node" clear_params="true">
+			<rosparam command="load" file="$(find auv3_localization)/params/ekf_local.yaml" />
+			<remap from="odometry/filtered" to="ekf_local_odom" />
+			<!-- <remap from="accel/filtered" to=""/> -->
+		</node>
+	</group>
+</launch>

@@ -1,0 +1,45 @@
+<!-- This file is part of AUV V-4.
+    Author: Vinay Naidu
+    Email: vinay.naidu1311@gmail.com
+    Year: 2023
+    Copyright (C) 2023 Autonomous and Undersea Subsystems Division
+    
+    -->
+
+<launch>
+    <arg name="robot_name" default="auv3" />
+    <include file="$(find auv3_description)/launch/auv3_gazebo.launch" />
+    <include file="$(find auv3_simulation)/launch/velocity_cmd.launch" />
+    <include file="$(find auv3_localization)/launch/robot_localization_local.launch" />
+    <include file="$(find auv3_localization)/launch/robot_localization_global.launch" />
+    <include file="$(find auv3_localization)/launch/navsat_transform.launch" />
+    <include file="$(find auv3_localization)/launch/rviz_localization.launch" />
+    <node name="twistTOtwiststamp" pkg="auv3_gps_navigation" type="twistTOtwiststamp.py" />
+
+
+    <node
+        ns="$(arg robot_name)"
+        name="world2ned"
+        pkg="tf2_ros"
+        type="static_transform_publisher"
+        args="0.0 0.0 0.0 0.0 0.0 0.0 /world /world_ned" />
+    <node
+        ns="$(arg robot_name)"
+        name="odom2world"
+        pkg="tf2_ros"
+        type="static_transform_publisher"
+        args="0.0 0.0 0.0 0.0 0.0 0.0 /odom /world" />
+
+    <node
+        ns="$(arg robot_name)"
+        name="cg_link"
+        pkg="tf2_ros"
+        type="static_transform_publisher"
+        args="0.0 0.0 0.0 0.0 0.0 0.0 /base_link /cg_link" />
+
+    <include file="$(find auv4_bringup)/launch/include/control.launch.xml">
+        <arg name="robot_name" value="$(arg robot_name)" />
+    </include>
+
+    <node pkg="auv4_driver" name="navigation_controller_sim" type="navigation_controller.py" output="screen"/>
+</launch>

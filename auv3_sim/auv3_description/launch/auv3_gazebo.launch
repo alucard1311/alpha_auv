@@ -1,0 +1,24 @@
+<?xml version="1.0"?>
+<launch>
+    <arg name="robot" default="auv3"/>
+    
+    <!-- Launch Gazebo with underwater world -->
+    <include file="$(find gazebo_ros)/launch/empty_world.launch">
+        <arg name="gui" value="true"/>
+        <arg name="paused" value="false"/>
+        <arg name="world_name" value="$(find auv3_simulation)/worlds/uwv.world"/>
+    </include>
+     
+    <group ns="auv3">
+        <!-- spawn in Gazebo with GUI -->
+        <param name="robot_description" command="$(find xacro)/xacro $(find auv3_description)/urdf/$(arg robot).xacro"/>
+        <node name="spawner" pkg="gazebo_ros" type="spawn_model" respawn="false" output="screen" args="-urdf -model auv3 -param robot_description -x 0 -y 0 -z -1 "/>
+
+        <!-- Load and spawn the model, starts the joint & state publishers, make the model move -->
+        <!-- <param name="model_name" type="str" value="auv3"/>
+        <param name="base_link_name" type="str" value="base_link"/> -->
+        <node name="joint_state_publisher" pkg="joint_state_publisher" type="joint_state_publisher" respawn="false"/>
+        <node name="robot_state_publisher" pkg="robot_state_publisher" type="robot_state_publisher"/>
+        <!-- <node name="apply_velocity" pkg="dave_nodes" type="simple_box_motion.py" respawn="false" output="screen"/> -->
+    </group>
+</launch>

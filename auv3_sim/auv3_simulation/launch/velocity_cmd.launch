@@ -1,0 +1,18 @@
+<?xml version="1.0"?>
+<launch>   
+    <group ns="auv3">
+        <!-- Load controller configurations (vehicle and arm) from YAML file to parameter server -->
+        <rosparam file="$(find auv3_simulation)/config/auv3.yaml" command="load"/>
+        <node name="velocity_control" pkg="freefloating_gazebo" type="pid_control" output="screen" respawn="true">
+            <param name="body_control" value="velocity"/>
+        </node>
+        <node name="position_control" pkg="freefloating_gazebo" type="pid_control" output="screen" respawn="true">
+            <param name="joint_control" value="position"/>
+        </node>
+        
+        
+        <!-- Load gui -->
+        <!-- <include file="$(find freefloating_gazebo)/gui/pose_gui.launch"/> -->
+        <!-- <include file="$(find freefloating_gazebo)/gui/velocity_gui.launch"/> -->
+    </group>   
+</launch>

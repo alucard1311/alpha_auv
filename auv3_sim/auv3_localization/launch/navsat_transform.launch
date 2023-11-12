@@ -1,0 +1,16 @@
+<launch>
+  <!-- <group ns="auv3"> -->
+    <node pkg="robot_localization" type="navsat_transform_node" name="navsat_transform_node" respawn="true">
+      <rosparam command="load" file="$(find auv3_localization)/params/navsat_transform.yaml" />
+      <remap from="/imu/data" to="/auv3/imu/data" />
+      <remap from="/gps/fix" to="/auv3/gps/fix" />
+      <remap from="/fromLL" to="/auv3/fromLL"/>
+      <remap from="/odometry/filtered" to="/auv3/ekf_global_odom" />
+    </node>    
+    <!-- map_link -> base_link -->
+    <!-- <node pkg="tf2_ros"
+      type="static_transform_publisher"
+      name="base_link_broadcaster"
+      args="0 0 0 0 0 0 map_link base_link" /> -->
+  <!-- </group> -->
+</launch>

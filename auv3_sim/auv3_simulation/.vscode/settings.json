@@ -1,0 +1,16 @@
+{
+    "python.autoComplete.extraPaths": [
+        "/home/atd/ros_mvp_ws/devel/lib/python3/dist-packages",
+        "/home/atd/auv_ws/devel/lib/python3/dist-packages",
+        "/home/atd/uuv_ws/devel/lib/python3/dist-packages",
+        "/home/atd/catkin_ws/carto_ws/install_isolated/lib/python3/dist-packages",
+        "/opt/ros/noetic/lib/python3/dist-packages"
+    ],
+    "python.analysis.extraPaths": [
+        "/home/atd/ros_mvp_ws/devel/lib/python3/dist-packages",
+        "/home/atd/auv_ws/devel/lib/python3/dist-packages",
+        "/home/atd/uuv_ws/devel/lib/python3/dist-packages",
+        "/home/atd/catkin_ws/carto_ws/install_isolated/lib/python3/dist-packages",
+        "/opt/ros/noetic/lib/python3/dist-packages"
+    ]
+}

@@ -1,0 +1,1 @@
+controller_joint_names: ['', 'fwd_thruster_u_joint', 'fwd_thruster_s_joint', 'rear_thruster_s_joint', 'rear_thruster_u_joint', 'surge_thruster_joint', ]

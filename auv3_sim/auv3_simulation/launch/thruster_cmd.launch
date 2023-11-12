@@ -1,0 +1,4 @@
+<?xml version="1.0"?>
+<launch>
+    <include file="$(find freefloating_gazebo)/gui/depth_gui.launch" ns="auv3s"/>
+</launch>

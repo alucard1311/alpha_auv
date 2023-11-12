@@ -1,0 +1,39 @@
+<?xml version="1.0" ?>
+<robot name="pan" xmlns:xacro="http://www.ros.org/wiki/xacro">
+    
+  <gazebo>
+  <!-- Gazebo plugin listens to the body-->
+  <plugin name="freefloating_gazebo_control" filename="libfreefloating_gazebo_control.so">
+      <switchService>switch</switchService>
+      <updateRate>100</updateRate>
+      <link>base_link</link>
+  </plugin>             
+  </gazebo>
+
+  <link name="base_link">
+    <visual>
+      <origin xyz= "0 0 0" rpy="0 0 0"/>
+      <geometry>
+        <cylinder length="0.1" radius="0.2"/>
+        <!-- <mesh filename="package://auv3_simulation/meshes/base_link.STL" /> -->
+      </geometry>
+    </visual>
+    <inertial>
+      <origin xyz="0 0 0.0" rpy="0 0 0"/>
+      <mass value="5"/>
+      <inertia
+    ixx="5"
+    ixy="0.0"
+    ixz="0.0"
+    iyy="5"
+    iyz="5"
+    izz="5"/>
+    </inertial>
+    <buoyancy>
+      <compensation>1.01</compensation>
+      <origin xyz= "0 0 0"/>
+      <limit radius=".15"/>
+      <damping xyz="50 100 60" rpy="50 50 50"/>
+    </buoyancy>
+  </link>
+</robot>

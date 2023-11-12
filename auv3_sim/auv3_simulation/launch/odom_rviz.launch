@@ -1,0 +1,11 @@
+<launch>
+  <arg name="robot" default="auv3"/>
+    <group ns="auv3"> 
+      <param name="robot_description" command="$(find xacro)/xacro $(find auv3_simulation)/urdf/$(arg robot).xacro"/>
+      <node name="robot_state_publisher" pkg="robot_state_publisher" type="robot_state_publisher" />
+      <node name="rviz" pkg="rviz" type="rviz"  args="-d $(find auv3_simulation)/config/rviz.rviz" output="screen"  respawn="false"/>
+  </group>
+
+  <node pkg="tf2_ros" type="static_transform_publisher" name="tf_world_odom" args="0 0 0 0 0 0 world odom "/>
+  <node pkg="tf2_ros" type="static_transform_publisher" name="tf_footprint_base" args="0 0 0 0 0 0 base_footprint base_link "/>
+</launch>

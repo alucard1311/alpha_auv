@@ -1,0 +1,14 @@
+state_fail: start
+
+
+
+
+# target_frame_id: {{ set in the launch file }}
+# target_frame_id: alpha/odom
+
+
+waypoints:
+  - {lat: 17.392018, long: 78.51625}
+  - {lat: 17.391841754786284, long: 78.51617288167012}
+  # - {lat: 17.39220, long: 78.516353}
+  # - {lat: 17.391841754786284, long: 78.51617288167012}

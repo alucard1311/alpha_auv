@@ -1,0 +1,37 @@
+<launch>
+        <!-- Static Transforms, parentlink -> childlink = <sensor_link> 
+        <node pkg="tf2_ros" type="static_transform_publisher" name="childlink_broadcaster" args="x y z r p y parentlink childlink" />
+        -->
+        <!-- <group ns="auv3"> -->
+                <!-- base_link -> imu_link -->
+                <node pkg="tf2_ros"
+                        type="static_transform_publisher"
+                        name="imu_link_broadcaster"
+                        args="0 0 0 0 0 0 base_link imu_link" />
+
+                <!-- base_link -> gps_link -->
+                <node pkg="tf2_ros"
+                        type="static_transform_publisher"
+                        name="gps_link_broadcaster"
+                        args="0 0 0 0 0 0 base_link gps_link" />
+
+                <!-- base_link -> pressure_link -->
+                <node pkg="tf2_ros"
+                        type="static_transform_publisher"
+                        name="pressure_link_broadcaster"
+                        args="0 0 0 0 0 0 base_link pressure_link" />
+
+                <!-- base_link -> dvl_link -->
+                <node pkg="tf2_ros"
+                        type="static_transform_publisher"
+                        name="dvl_link_broadcaster"
+                        args="0 0 0 0 0 0 base_link dvl_link" />
+
+                <!-- odom_link -> base_link -->
+                <node pkg="tf2_ros"
+                        type="static_transform_publisher"
+                        name="base_link_broadcaster"
+                        args="0 0 0 0 0 0 odom_link base_link" />
+        <!-- </group> -->
+
+</launch>

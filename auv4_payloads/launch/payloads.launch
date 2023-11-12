@@ -1,0 +1,9 @@
+<launch>
+	<include file="$(find sbg_driver)/launch/sbg_device.launch"/>
+	<node pkg="auv4_payloads" name="orientation_data" type="orientation_data.py" output="screen"/>
+	<node pkg="auv4_payloads" name="bar30_readings" type="bar30_readings.py" output="screen"/>
+	<node pkg="auv4_payloads" name="velocity_publish" type="dvl_publisher.py" output="screen"/>
+	<node pkg="auv4_payloads" name="gps_readings" type="gps_readings.py" output="screen"/>
+	<!-- <node pkg="auv3_stm_link" name="rf_watchdog" type="rf_watchdog.py" output="screen"/> -->
+
+</launch>

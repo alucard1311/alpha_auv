@@ -1,0 +1,166 @@
+<?xml version="1.0"?>
+<robot name="auv3" xmlns:xacro="http://www.ros.org/wiki/xacro">
+
+  <!-- Rviz material color -->
+  <material name="orange"> <color rgba="1 0.5 0 1"/> </material>
+  <material name="black"> <color rgba="0 0 0 1"/> </material>
+
+  <!-- Body properties -->
+  <xacro:property name="thr_f_u"      value="0.86614"/>
+  <xacro:property name="thr_f_s"      value="0.76114"/>
+  <xacro:property name="thr_r_u"      value="-0.68386"/>
+  <xacro:property name="thr_r_s"      value="-0.57886"/>
+  <xacro:property name="thr_s"        value="-0.96286"/>
+  <xacro:property name="thr_f_u_mesh" value="package://auv3_simulation/meshes/fwd_thruster_u_link.STL"/>
+  <xacro:property name="thr_f_s_mesh" value="package://auv3_simulation/meshes/fwd_thruster_s_link.STL"/>
+  <xacro:property name="thr_r_u_mesh" value="package://auv3_simulation/meshes/rear_thruster_u_link.STL"/>
+  <xacro:property name="thr_r_s_mesh" value="package://auv3_simulation/meshes/rear_thruster_s_link.STL"/>
+  <xacro:property name="thr_s_mesh"   value="package://auv3_simulation/meshes/surge_thruster_link.STL"/>
+    
+  <xacro:property name="imu_origin_offset" value="0 0 0"/>
+  <xacro:property name="imu_dimensions" value="0.005 0.005 0.002"/>
+
+  <!-- Thruster link -->
+  <xacro:macro name="thruster_link" params="name xyz rpy meshfile">        
+    <link name="${name}">
+      <visual>
+        <origin xyz="0 0 0" rpy="${rpy}" />
+        <geometry>
+          <mesh filename="${meshfile}" />
+        </geometry>
+        <material name="black"/> <!-- only works in rviz -->
+      </visual>
+      <buoyancy>
+        <compensation> 1.0 </compensation>
+      </buoyancy>
+    </link>
+    <gazebo reference="${name}"> 
+      <material>Gazebo/Black</material> 
+    </gazebo>
+    <joint name="${name}_joint" type="fixed">
+      <parent link="base_link"/>
+      <child link="${name}"/>
+      <origin xyz="${xyz}" rpy="${rpy}" />
+    </joint>                    
+  </xacro:macro>
+
+  <gazebo>
+
+    <!-- *************************************************************************************************** -->
+    <!-- Instead of the map, a name field including some link name may be given. 
+    In this case the parser will assume this is a thruster link, where the Z-axis is the thrust orientation. -->
+    <!-- *************************************************************************************************** -->
+
+    <!-- Gazebo plugin listens to the body-->
+    <plugin name="freefloating_gazebo_control" filename="libfreefloating_gazebo_control.so">
+      <switchService>switch</switchService>
+      <updateRate>100</updateRate>
+      <link>base_link</link>
+      <thruster>
+        <effort>30</effort>
+        <name>thr_f_u_link</name>
+        <!-- <map>0 0 -1 0 ${thr_f_u} 0</map> -->
+      </thruster>       
+      <thruster>
+        <effort>30</effort>
+        <name>thr_f_s_link</name>
+        <!-- <map>0 1 0 0 0 ${thr_f_s}</map> -->
+      </thruster>
+      <thruster>
+        <effort>30</effort>
+        <name>thr_r_u_link</name>
+        <!-- <map>0 0 -1 0 ${thr_r_u} 0</map> -->
+      </thruster>
+      <thruster>
+        <effort>30</effort>
+        <name>thr_r_s_link</name>
+        <!-- <map>0 1 0 0 0 ${thr_r_s}</map> -->
+      </thruster>
+      <thruster>
+        <effort>30</effort>
+        <name>thr_s_link</name>
+        <!-- <map>1 0 0 0 0 0</map> -->
+      </thruster>
+    </plugin>
+  </gazebo>
+
+  <!-- base_link -->
+  <link name="base_link">
+    <visual>
+      <origin xyz= "0 0 0" rpy="0 0 3.1415"/>
+      <geometry>
+        <mesh filename="package://auv3_simulation/meshes/base_link.STL" />
+      </geometry>
+      <material name="orange"/> <!-- only works in rviz -->
+    </visual>
+    <inertial>
+      <origin xyz="0 0 0" rpy="0 0 3.1415"/>
+      <mass value="30"/>
+      <inertia
+        ixx="0.028032" ixy="-0.0034682" ixz="0.000773" iyy="2.7828" iyz="-5.189E-07" izz="2.7828" />
+    </inertial>
+    <collision>
+      <origin xyz= "0 0 0" rpy="0 0 3.1415"/>
+      <geometry>
+        <mesh filename="package://auv3_simulation/meshes/base_link.STL" />
+      </geometry>
+    </collision>
+    <buoyancy>
+      <compensation>1.01</compensation>
+      <origin xyz= "0 0 0"/>
+      <limit radius="0.15"/>
+      <damping xyz="50 50 50" rpy="50 50 50"/>
+    </buoyancy>
+  </link>
+  <gazebo reference="base_link"> 
+    <material>Gazebo/Orange</material> 
+  </gazebo>
+  
+  <xacro:thruster_link name="thr_f_u_link" xyz="${thr_f_u} 0 0" rpy="0 0 0"     meshfile="${thr_f_u_mesh}" />
+  <xacro:thruster_link name="thr_f_s_link" xyz="${thr_f_s} 0 0" rpy="1.57 0 0"  meshfile="${thr_f_s_mesh}" />
+  <xacro:thruster_link name="thr_r_u_link" xyz="${thr_r_u} 0 0" rpy="0 0 0"     meshfile="${thr_r_u_mesh}" />
+  <xacro:thruster_link name="thr_r_s_link" xyz="${thr_r_s} 0 0" rpy="1.57 0 0"  meshfile="${thr_r_s_mesh}" />
+  <xacro:thruster_link name="thr_s_link"   xyz="${thr_s}   0 0" rpy="0 1.57 0"  meshfile="${thr_s_mesh}"   />
+
+  <!-- imu_link -->
+  <link name="imu_link">
+    <collision> 
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <geometry>
+		    <box size="${imu_dimensions}"/>
+      </geometry>
+    </collision>
+    <visual> 
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <geometry>
+		    <box size="${imu_dimensions}"/>
+      </geometry>
+    </visual>
+    <inertial>
+      <mass value="1e-5" />
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <inertia ixx="1e-6" ixy="0" ixz="0" iyy="1e-6" iyz="0" izz="1e-6" />
+    </inertial>
+  </link> 
+  <joint name="imu_joint" type="fixed">
+    <origin xyz="${imu_origin_offset}" rpy="0 0 -1.5708"/>
+    <parent link="base_link"/>
+    <child link="imu_link"/>
+  </joint>
+  <gazebo reference="imu_link">
+	  <material>Gazebo/Purple</material>
+  </gazebo>
+
+  <!-- IMU: Plugin -->
+  <gazebo>
+    <plugin name="imu_plugin" filename="libgazebo_ros_imu.so">
+      <alwaysOn>true</alwaysOn>
+      <bodyName>imu_link</bodyName>
+      <topicName>imu_data</topicName>
+      <serviceName>imu_service</serviceName>
+      <gaussianNoise>0.01</gaussianNoise>
+      <updateRate>30.0</updateRate>
+    </plugin>
+  </gazebo>
+
+</robot>

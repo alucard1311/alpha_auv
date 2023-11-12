@@ -1,0 +1,10 @@
+<launch>
+	<group ns="auv3">
+		<!-- <node pkg="auv3_localization" type="depth_odom.py" name="depth_odom_node"/> -->
+		<node pkg="robot_localization" type="ekf_localization_node" name="ekf_global_node" clear_params="true" >
+			<rosparam command="load" file="$(find auv3_localization)/params/ekf_global_gps.yaml" />
+			<remap from="odometry/filtered" to="ekf_global_odom"/>
+		</node>
+		<!-- <include file="$(find auv3_localization)/launch/navsat_transform.launch"/> -->
+	</group>
+</launch>
