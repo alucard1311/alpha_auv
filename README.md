@@ -62,13 +62,6 @@ roscd auv4_config/param/gps_wpt.yaml
 ```
 ---
 
-## Authors
-
-
-Copyright (C) 2023 Autonomous and Undersea Subsystems Division
-
-```bash
-authors = {Vinay, Yash},
 year    = {2023}
 mail    = {vinay_atd@thesalemaeropark.com}
 
