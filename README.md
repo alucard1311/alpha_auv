@@ -16,15 +16,7 @@
 ---
 
 ## Installation
----
-### MVP Installation: in the ros workspace
 
-```bash
-git clone --single-branch --branch noetic-devel https://github.com/uri-ocean-robotics/mvp_msgs
-git clone --single-branch --branch noetic-devel https://github.com/uri-ocean-robotics/mvp_control
-git clone --single-branch --branch noetic-devel https://github.com/uri-ocean-robotics/mvp_mission
-git clone --single-branch --branch noetic-devel https://github.com/uri-ocean-robotics/stonefish_mvp
-```
 
 ## Test The Simulation
 ---
@@ -59,10 +51,4 @@ python3 navigation_controller.py
 ### To edit the waypoints for gps_navigation
 ```bash
 roscd auv4_config/param/gps_wpt.yaml
-```
----
-
-year    = {2023}
-mail    = {vinay_atd@thesalemaeropark.com}
-
 ```
